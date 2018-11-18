@@ -59,6 +59,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+                app:videoUrl="@{model.videoUrl}"
                 tools:visibility="gone" />
 
 

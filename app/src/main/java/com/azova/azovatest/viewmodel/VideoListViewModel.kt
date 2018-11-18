@@ -12,6 +12,8 @@ class VideoListViewModel(private val videoModel: VideoModel, private val filDown
 
     val imageUrl: String = videoModel.thumb
 
+    val videoUrl: String = videoModel.videoPath
+
     @Bindable
     var isDownloadDisplay = (videoModel.downloadState == 1)
 
