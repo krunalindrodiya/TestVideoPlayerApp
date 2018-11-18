@@ -54,4 +54,9 @@ dependencies {
 
     kapt 'androidx.databinding:databinding-compiler:3.2.0'
 
+//    implementation 'com.allattentionhere:autoplayvideos:0.2.0'
+
+    implementation "im.ene.toro3:toro:3.5.2"
+    implementation "im.ene.toro3:toro-ext-exoplayer:3.5.2"
+
 }

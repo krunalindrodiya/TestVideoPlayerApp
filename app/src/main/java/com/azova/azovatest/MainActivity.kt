@@ -2,8 +2,10 @@ package com.azova.azovatest
 
 import android.os.Bundle
 import android.os.Environment
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.azova.azovatest.adapter.VideoListAdapter
 import com.azova.azovatest.core.IFileDownloadListener
 import com.azova.azovatest.core.IMainPresenter
@@ -11,8 +13,10 @@ import com.azova.azovatest.core.IMainView
 import com.azova.azovatest.impl.MainPresenterImpl
 import com.azova.azovatest.model.VideoModel
 import com.azova.azovatest.model.VideoModelList
+import com.azova.azovatest.utils.isNetworkConnected
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
+
 
 class MainActivity : AppCompatActivity(), IMainView, IFileDownloadListener {
 
@@ -30,8 +34,25 @@ class MainActivity : AppCompatActivity(), IMainView, IFileDownloadListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         presenter.setVideoPath(videoPath)
-        //get Video=list from json file.
-        presenter.getVideoList(this)
+
+        if (isNetworkConnected()) {
+            //get Video=list from json file.
+            presenter.getVideoList(this)
+
+        } else {
+            showDialog()
+        }
+
+    }
+
+    private fun showDialog() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setCancelable(false)
+                .setMessage("No internet connection found, please check your device network.")
+                .setPositiveButton(android.R.string.yes) { dialog, which ->
+                    finish()
+                }
+                .show()
     }
 
     override fun videoListResponse(videoList: VideoModelList) {

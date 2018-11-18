@@ -33,6 +33,7 @@ object BindingAdapter {
             val video = Uri.parse(videoUrl)
             this.setMediaController(mc)
             this.setVideoURI(video)
+            this.requestFocus()
         }
     }
 
