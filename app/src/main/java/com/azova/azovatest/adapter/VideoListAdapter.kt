@@ -34,8 +34,9 @@ class VideoListAdapter(context: Context, private val videoList: ArrayList<VideoM
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val videoListViewModel = VideoListViewModel(videoList[position], fileDownloadListener)
         viewHolder.setModel(videoListViewModel)
-        videoList[position].videoPath.let {
-            val uri = Uri.parse(it)
+
+        if (videoList[position].videoPath != null && videoList[position].videoPath.isNotEmpty()) {
+            val uri = Uri.parse(videoList[position].videoPath)
             viewHolder.bind(uri)
         }
     }
@@ -72,7 +73,7 @@ class VideoListAdapter(context: Context, private val videoList: ArrayList<VideoM
         }
 
         override fun wantsToPlay(): Boolean {
-            return ToroUtil.visibleAreaOffset(this, itemView.parent) >= 0.85;
+            return (ToroUtil.visibleAreaOffset(this, itemView.parent) >= 0.85) && mediaUri != null
         }
 
         override fun play() {
