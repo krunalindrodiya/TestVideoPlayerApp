@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="model"
             type="com.azova.azovatest.viewmodel.VideoListViewModel" />
@@ -39,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="5dp"
+                android:visibility="@{model.videoViewVisible ? View.GONE: View.VISIBLE}"
                 app:imageUrl="@{model.imageUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -46,7 +49,42 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtTitle"
                 tools:src="@color/colorPrimary" />
 
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="5dp"
+                android:visibility="@{model.videoViewVisible ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+                tools:visibility="gone" />
 
+
+            <ImageView
+                android:id="@+id/imgDownload"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:onClick="@{model.downloadClick}"
+                android:src="@drawable/ic_download"
+                android:visibility="@{model.downloadDisplay ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{model.progressDisplay ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
 
 
         </android.support.constraint.ConstraintLayout>
